@@ -98,7 +98,7 @@ const startGame = async () => {
       const enigm = listEnigms[Math.floor(Math.random() * listEnigms.length)];
       const answer = await prompt(`${enigm.question} `);
       if (answer.toLowerCase() === enigm.response.toLowerCase()) {
-        console.info('Good job! You answered correctly.');
+        console.info('Good job!');
         mansion[playerTarget.x][playerTarget.y] = player;
       } else {
         console.info('Wrong answer! Try again.');
