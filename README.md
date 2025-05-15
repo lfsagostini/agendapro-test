@@ -15,28 +15,28 @@ El juego será interactivo, basado en preguntas y respuestas por terminal.
 - Las habitaciones de entrada y dulces no tienen enigmas.
 
 Ejemplo de representación de la mansión:
-🚪⬜️⬜️⬜️
+🚪⬜️⬜️⬜
 ⬜️👻⬜️⬜️
 ⬜️⬜️⬜️👻
 ⬜️⬜️🍭⬜️
 
 ## ❓ Enigmas
 
-• Cada habitación propone un enigma aleatorio que debes responder con texto.
-• Si fallas el enigma, no podrás moverte a otra habitación.
+- Cada habitación propone un enigma aleatorio que debes responder con texto.
+- Si fallas el enigma, no podrás moverte a otra habitación.
 
 ## 🧭 Movimiento
 
-• Si resuelves el enigma, podrás elegir a dónde desplazarte:
-• Opciones: norte, sur, este o oeste. También puedes usar: arriba, abajo, izquierda o derecha
-(Solo se mostrarán las direcciones posibles desde tu posición actual.)
+- Si resuelves el enigma, podrás elegir a dónde desplazarte:
+- Opciones: norte, sur, este o oeste. También puedes usar: arriba, abajo, izquierda o derecha
+  (Solo se mostrarán las direcciones posibles desde tu posición actual.)
 
 ## 🍭 Salida
 
-• Tu objetivo es encontrar la habitación de los dulces para salir de la mansión.
+- Tu objetivo es encontrar la habitación de los dulces para salir de la mansión.
 
 ## 👻 (Bonus) Fantasmas
 
-• Hay un 10% de probabilidad de que aparezca un fantasma en una habitación.
-• Si aparece un fantasma, tendrás que resolver dos enigmas para salir.
-🎃 ¡Buena suerte en tu aventura espeluznante! 🎃
+- Hay un 10% de probabilidad de que aparezca un fantasma en una habitación.
+- Si aparece un fantasma, tendrás que resolver dos enigmas para salir.
+  🎃 ¡Buena suerte en tu aventura espeluznante! 🎃
