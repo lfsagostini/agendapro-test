@@ -53,6 +53,7 @@ const handleEnigm = async (enigm) => {
     return true;
   } else {
     console.info('Wrong answer!');
+
     return false;
   }
 };
@@ -69,7 +70,7 @@ const startGame = async () => {
   while (!candyFound) {
     console.table(mansion);
     // Get the player's move
-    // using WASD
+    // Using WASD
     // W = up, A = left, S = down, D = right
     const move = await prompt(
       'Enter your move (W - up, S - down, A- left, D- right): '
@@ -96,6 +97,7 @@ const startGame = async () => {
         break;
       default:
         console.info('Invalid move');
+        continue;
     }
 
     // Check player position slot
@@ -107,22 +109,27 @@ const startGame = async () => {
     } else if (currentSlot === ghost) {
       console.info('You found the ghost! You need to answer two enigms!');
       // Ask two enigms
-      // TODO: Refactor enighm to use a function
       const enigm1 = listEnigms[Math.floor(Math.random() * listEnigms.length)];
       const answer1 = await handleEnigm(enigm1);
       if (!answer1) {
+        playerTarget.x = lastPosition.x;
+        playerTarget.y = lastPosition.y;
         continue;
       }
       const enigm2 = listEnigms[Math.floor(Math.random() * listEnigms.length)];
-      const answer2 = await handleEnigm(enigm2);
+      const answer2 = await handleEnigm(enigm2, lastPosition);
       if (!answer2) {
+        playerTarget.x = lastPosition.x;
+        playerTarget.y = lastPosition.y;
         continue;
       }
     } else if (currentSlot === enigm) {
       // Ask an enigm
       const enigm = listEnigms[Math.floor(Math.random() * listEnigms.length)];
-      const answer = await handleEnigm(enigm);
+      const answer = await handleEnigm(enigm, lastPosition);
       if (!answer) {
+        playerTarget.x = lastPosition.x;
+        playerTarget.y = lastPosition.y;
         continue;
       }
     }
@@ -136,8 +143,6 @@ const startGame = async () => {
     ) {
       mansion[lastPosition.x][lastPosition.y] = enigm;
     }
-
-    console.table(mansion);
   }
 };
 
