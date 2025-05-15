@@ -23,14 +23,14 @@ const listEnigms = [
     question: 'What is the dog sound?',
     response: 'Woof',
   },
-  {
-    question: 'What is the cat sound?',
-    response: 'Meow',
-  },
-  {
-    question: 'What is the cow sound?',
-    response: 'Moo',
-  },
+  // {
+  //   question: 'What is the cat sound?',
+  //   response: 'Meow',
+  // },
+  // {
+  //   question: 'What is the cow sound?',
+  //   response: 'Moo',
+  // },
 ];
 
 const rlInterface = require('readline').createInterface({
@@ -48,7 +48,6 @@ const prompt = (question) => {
 
 const startGame = async () => {
   console.info('Starting the game...');
-  console.table(mansion);
 
   const playerTarget = {
     x: 0,
@@ -57,6 +56,7 @@ const startGame = async () => {
   let candyFound = false;
 
   while (!candyFound) {
+    console.table(mansion);
     // Get the player's move
     // using WASD
     // W = up, A = left, S = down, D = right
@@ -92,7 +92,26 @@ const startGame = async () => {
     } else if (currentSlot === ghost) {
       console.info('You found the ghost! You need to answer two enigms!');
       // Ask two enigms
-      break;
+      // TODO: Refactor enighm to use a function
+      const enigm1 = listEnigms[Math.floor(Math.random() * listEnigms.length)];
+      const answer1 = await prompt(`${enigm1.question} `);
+      if (answer1.toLowerCase() === enigm1.response.toLowerCase()) {
+        console.info('Good job!');
+        mansion[playerTarget.x][playerTarget.y] = player;
+      } else {
+        console.info('Wrong answer! Try again.');
+      }
+      const enigm2 = listEnigms[Math.floor(Math.random() * listEnigms.length)];
+      const answer2 = await prompt(`${enigm2.question} `);
+      if (answer2.toLowerCase() === enigm2.response.toLowerCase()) {
+        console.info('Good job!');
+        mansion[playerTarget.x][playerTarget.y] = player;
+      } else {
+        console.info('Wrong answer! Try again.');
+      }
+      console.info('You can continue your way!');
+      // Remove the ghost
+      mansion[playerTarget.x][playerTarget.y] = player;
     } else if (currentSlot === enigm) {
       // Ask an enigm
       const enigm = listEnigms[Math.floor(Math.random() * listEnigms.length)];
@@ -104,7 +123,6 @@ const startGame = async () => {
         console.info('Wrong answer! Try again.');
       }
     }
-    console.table(mansion);
   }
 };
 
