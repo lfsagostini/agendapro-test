@@ -23,14 +23,14 @@ const listEnigms = [
     question: 'What is the dog sound?',
     response: 'Woof',
   },
-  // {
-  //   question: 'What is the cat sound?',
-  //   response: 'Meow',
-  // },
-  // {
-  //   question: 'What is the cow sound?',
-  //   response: 'Moo',
-  // },
+  {
+    question: 'What is the cat sound?',
+    response: 'Meow',
+  },
+  {
+    question: 'What is the cow sound?',
+    response: 'Moo',
+  },
 ];
 
 const rlInterface = require('readline').createInterface({
