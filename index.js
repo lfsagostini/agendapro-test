@@ -46,6 +46,17 @@ const prompt = (question) => {
   });
 };
 
+const handleEnigm = async (enigm) => {
+  const answer = await prompt(`${enigm.question} `);
+  if (answer.toLowerCase() === enigm.response.toLowerCase()) {
+    console.info('Good job!');
+    return true;
+  } else {
+    console.info('Wrong answer!');
+    return false;
+  }
+};
+
 const startGame = async () => {
   console.info('Starting the game...');
 
@@ -65,6 +76,10 @@ const startGame = async () => {
     );
 
     console.info(`You moved ${move}`);
+    const lastPosition = {
+      x: playerTarget.x,
+      y: playerTarget.y,
+    };
     // Update the player's position
     switch (move.toUpperCase()) {
       case 'W':
@@ -94,35 +109,35 @@ const startGame = async () => {
       // Ask two enigms
       // TODO: Refactor enighm to use a function
       const enigm1 = listEnigms[Math.floor(Math.random() * listEnigms.length)];
-      const answer1 = await prompt(`${enigm1.question} `);
-      if (answer1.toLowerCase() === enigm1.response.toLowerCase()) {
-        console.info('Good job!');
-        mansion[playerTarget.x][playerTarget.y] = player;
-      } else {
-        console.info('Wrong answer! Try again.');
+      const answer1 = await handleEnigm(enigm1);
+      if (!answer1) {
+        continue;
       }
       const enigm2 = listEnigms[Math.floor(Math.random() * listEnigms.length)];
-      const answer2 = await prompt(`${enigm2.question} `);
-      if (answer2.toLowerCase() === enigm2.response.toLowerCase()) {
-        console.info('Good job!');
-        mansion[playerTarget.x][playerTarget.y] = player;
-      } else {
-        console.info('Wrong answer! Try again.');
+      const answer2 = await handleEnigm(enigm2);
+      if (!answer2) {
+        continue;
       }
-      console.info('You can continue your way!');
-      // Remove the ghost
-      mansion[playerTarget.x][playerTarget.y] = player;
     } else if (currentSlot === enigm) {
       // Ask an enigm
       const enigm = listEnigms[Math.floor(Math.random() * listEnigms.length)];
-      const answer = await prompt(`${enigm.question} `);
-      if (answer.toLowerCase() === enigm.response.toLowerCase()) {
-        console.info('Good job!');
-        mansion[playerTarget.x][playerTarget.y] = player;
-      } else {
-        console.info('Wrong answer! Try again.');
+      const answer = await handleEnigm(enigm);
+      if (!answer) {
+        continue;
       }
     }
+    mansion[playerTarget.x][playerTarget.y] = player;
+    // if last position is not the same as current position and last position is not the start
+    // set last position to enigm
+    if (
+      (lastPosition.x !== playerTarget.x ||
+        lastPosition.y !== playerTarget.y) &&
+      mansion[lastPosition.x][lastPosition.y] !== start
+    ) {
+      mansion[lastPosition.x][lastPosition.y] = enigm;
+    }
+
+    console.table(mansion);
   }
 };
 
