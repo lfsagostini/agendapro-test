@@ -2,17 +2,19 @@
 // S - start
 // C - Candy
 // G - Ghost
-const start = 'S';
-const candy = 'C';
-const ghost = 'G';
+const start = 'Start';
+const candy = 'Candy';
+const ghost = 'Ghost';
+const enigm = '?';
 
 const mansion = [
-  [start, 0, 0, 0],
-  [0, 0, ghost, 0],
-  [0, 0, 0, ghost],
-  [0, 0, candy, 0],
+  [start, enigm, enigm, enigm],
+  [enigm, enigm, ghost, enigm],
+  [enigm, enigm, enigm, ghost],
+  [enigm, enigm, candy, enigm],
 ];
 
+// list of enigms
 const listEnigms = [
   {
     question: 'What is the dog sound?',
@@ -27,3 +29,18 @@ const listEnigms = [
     response: 'Moo',
   },
 ];
+
+const startGame = () => {
+  console.info('Starting the game...');
+  console.table(mansion);
+
+  const playerTarget = {
+    x: 0,
+    y: 0,
+  };
+  let candyFound = false;
+
+  while (!candyFound) {}
+};
+
+startGame();
